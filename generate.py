@@ -4,13 +4,15 @@ from random import randint
 # created the password object that adds the functionality of generating
 # a weird but kinda good combination of password
 # that will be a feature in the password manager that i am creating
+# this file also holds the master password so it's kinda hidden
 
 
-class Password:
+class Key:
     def __init__(self):
         self.alphabet = string.ascii_letters
         self.collection = []
-    
+        self.code= "123456"
+
     def start(self):
         for item in self.alphabet:
             self.collection.append(item)
@@ -25,6 +27,3 @@ class Password:
         for _ in range(_password_len):
             created += self.collection[randint(0,_limit)]
         return created
-
-
-pas = Password()
