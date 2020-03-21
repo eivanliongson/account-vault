@@ -32,12 +32,15 @@ class Actions:
         
 
         # sqlite command
-        self.c.execute("INSERT INTO accounts VALUES (:platform, :username, :password)", 
-        {"platform": platform, "username": username, "password": password})
-        # dictionary key => value
-        self.conn.commit()
-        print("*"*5)
-        print ("\nSuccess!")
+        with self.conn:
+            self.c.execute("insert into accounts values (:platform, :username, :password)", 
+            {"platform": platform, "username": username, "password": password})
+            # dictionary key => value
+            self.conn.commit()
+            print("*"*5)
+            print ("\nSuccess!")
 
     def get_all_accounts(self):
-        print(self.c.fetchall())
+        with self.conn:
+            data = self.c.execute("select * from accounts")
+            print(data.fetchall())
