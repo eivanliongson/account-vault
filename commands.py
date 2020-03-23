@@ -1,12 +1,14 @@
 import sqlite3
 from generate import Key
 
+# hope someone could help me improve this
+
 class Commands:
     def __init__(self):
         self.hold = ["Platform: ", "Username: ", "Password: "]
         self.conn = sqlite3.connect('database.db')
         self.c = self.conn.cursor()
-        print("Connected!")
+        print("Connected! Hi there!")
 
     def create(self): # creates the table accounts
         try:

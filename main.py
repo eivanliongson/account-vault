@@ -1,4 +1,4 @@
-# main program
+# hope someone could help me improve this
 import generate
 import commands
 
@@ -7,7 +7,7 @@ MASTER_PASSWORD = key.code
 
 # auth = input("Master Password: ")
 
-auth = "123456"
+auth = "supersecretpassword"
 
 list_of_commands = [
     "add - add account to storage",
