@@ -3,6 +3,7 @@ from generate import Key
 
 class Commands:
     def __init__(self):
+        self.hold = ["Platform: ", "Username: ", "Password: "]
         self.conn = sqlite3.connect('database.db')
         self.c = self.conn.cursor()
         print("Connected!")
@@ -42,8 +43,11 @@ class Commands:
 
     def get_all_accounts(self):
         with self.conn:
-            data = self.c.execute("select * from accounts")
-            print(data.fetchall())
+            data = self.c.execute("select * from accounts").fetchall()
+            print("\nAccounts registered: \n")
+            for i in range(len(data)):
+                print(data[i])
+                
 
     def get_account(self, platform):
         get = platform
@@ -51,7 +55,14 @@ class Commands:
             data = self.c.execute("select * from accounts where platform = :platform", 
             {"platform": get.upper()}).fetchone()
             # display data
-            hold = ["Platform: ", "Username: ", "Password: "]
-            print("Acoount Info: ")
+            print("\n"*3 + "Acoount Info: ")
             for i in range(len(data)):
-                print(hold[i] + data[i])
+                print(self.hold[i] + data[i])
+
+
+    def list_all_platforms(self):
+        with self.conn:
+            data = self.c.execute("select platform from accounts").fetchall()
+            print("\nPlatform Used: \n")
+            for i in range(len(data)):
+                print(data[i][0])

@@ -29,8 +29,10 @@ if auth == MASTER_PASSWORD:
             break
         elif cmnd.upper() == "ADD":
             action.add_account()
-        elif cmnd.upper() == "SHOW ALL":
+        elif cmnd == "show all":
             action.get_all_accounts()
+        elif cmnd.upper() == "LIST":
+            action.list_all_platforms()
         elif cmnd.upper() == "SHOW ACCOUNT":
             action.get_account(input("Enter Platform: "))
 else:
