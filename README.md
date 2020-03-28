@@ -15,7 +15,4 @@ this is also a way for me to learn and understand python programming
 i hope someone would throw some advice for what i can improve not only in this
 program also in programming as well and also the use of sqllite3
 
-planning to use tkinter soon with this hopefully
-
-
 # Python

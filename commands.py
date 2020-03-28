@@ -64,5 +64,12 @@ class Commands:
     
     def add_account_gui(self, data):
         print(data)
+        with self.conn:
+            self.c.execute("insert into accounts values (:platform, :username, :password)", 
+            {"platform": data[0], "username": data[1], "password": data[2]})
+            # dictionary key => value
+            self.conn.commit()
+            print("*"*5)
+            print ("\nSuccess!")
 
         
