@@ -7,7 +7,7 @@ MASTER_PASSWORD = key.code
 
 # auth = input("Master Password: ")
 
-auth = "supersecretpassword"
+auth = "123456"
 
 list_of_commands = [
     "add - add account to storage",
@@ -30,11 +30,13 @@ if auth == MASTER_PASSWORD:
         elif cmnd.upper() == "ADD":
             action.add_account()
         elif cmnd == "show all":
-            action.get_all_accounts()
+            print("Accounts")
+            for items in action.get_all_accounts():
+                print(items)
         elif cmnd.upper() == "LIST":
-            action.list_all_platforms()
+            print(action.list_all_platforms())
         elif cmnd.upper() == "SHOW ACCOUNT":
-            action.get_account(input("Enter Platform: "))
+            print(action.get_account(input("Enter Platform: ")))
 else:
     print("DENIED")
     

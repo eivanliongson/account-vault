@@ -32,8 +32,7 @@ class Commands:
             password = trig.generate()
         elif ans == "USE":
             password = input("Enter password: ")
-        
-
+            
         # sqlite command
         with self.conn:
             self.c.execute("insert into accounts values (:platform, :username, :password)", 
@@ -46,9 +45,7 @@ class Commands:
     def get_all_accounts(self):
         with self.conn:
             data = self.c.execute("select * from accounts").fetchall()
-            print("\nAccounts registered: \n")
-            for i in range(len(data)):
-                print(data[i])
+            return data
                 
 
     def get_account(self, platform):
@@ -56,15 +53,16 @@ class Commands:
         with self.conn:
             data = self.c.execute("select * from accounts where platform = :platform", 
             {"platform": get.upper()}).fetchone()
-            # display data
-            print("\n"*3 + "Acoount Info: ")
-            for i in range(len(data)):
-                print(self.hold[i] + data[i])
+            return data
 
 
     def list_all_platforms(self):
         with self.conn:
             data = self.c.execute("select platform from accounts").fetchall()
-            print("\nPlatform Used: \n")
-            for i in range(len(data)):
-                print(data[i][0])
+            return [items[0] for items in data]
+
+    
+    def add_account_gui(self, data):
+        print(data)
+
+        
