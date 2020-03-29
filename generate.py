@@ -11,7 +11,7 @@ class Key:
     def __init__(self):
         self.alphabet = string.ascii_letters
         self.collection = []
-        self.code= "123456"
+        self.code= "12021499"
 
     def start(self):
         for item in self.alphabet:
@@ -21,7 +21,7 @@ class Key:
 
     def generate(self):
         self.start()
-        _password_len = 12 # change base on how long you want your password
+        _password_len = 8 # change base on how long you want your password
         _limit = len(self.collection) - 1
         created = "" # holds the created password combination
         for _ in range(_password_len):

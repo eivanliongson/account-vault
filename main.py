@@ -5,9 +5,8 @@ import commands
 key = generate.Key()
 MASTER_PASSWORD = key.code
 
-# auth = input("Master Password: ")
+auth = input("Master Password: ")
 
-auth = "123456"
 
 list_of_commands = [
     "add - add account to storage",

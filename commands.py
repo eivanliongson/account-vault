@@ -8,6 +8,7 @@ class Commands:
         self.hold = ["Platform: ", "Username: ", "Password: "]
         self.conn = sqlite3.connect('database.db')
         self.c = self.conn.cursor()
+        print('\n'*1000)
         print("Connected! Hi there!")
 
     def create(self): # creates the table accounts
@@ -39,7 +40,6 @@ class Commands:
             {"platform": platform, "username": username, "password": password})
             # dictionary key => value
             self.conn.commit()
-            print("*"*5)
             print ("\nSuccess!")
 
     def get_all_accounts(self):
