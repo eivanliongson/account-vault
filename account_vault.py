@@ -1,13 +1,16 @@
 import random
 import sqlite3
+import string
+from pyfiglet import Figlet
 
-
+style = Figlet(font='slant')
 MASTERPASSWORD = 'supersecret'
 prompt = input('MASTER PASSWORD: ')
 if prompt != MASTERPASSWORD:
     print('Access Denied')
 else:
-    print('\n'*5 + 'Welcome!\nConnected..')
+    print(style.renderText('The Vault!'))
+    print('Welcome, Admin..')
 
     connect = sqlite3.connect('database.db')
     c = connect.cursor()
@@ -46,6 +49,11 @@ else:
             connect.commit()
             return f'Updated Password!'
 
+    def generate_pass():
+        code = string.ascii_letters + '123456789' + '!@#$%^&*'
+        generated = [code[random.randint(0,len(code)-1)] for x in range(8)] # change 8 to how long your password
+        return ''.join(generated)
+
     def display(data, title):
         print(title)
         for items in data:
@@ -53,7 +61,7 @@ else:
 
     while True:
         print('\nCommands:')
-        for items in ['add', 'view','view all','update','quit']:
+        for items in ['add', 'view','view all','update','generate','quit']:
             print(items)
         
         command = input(': ').upper()
@@ -66,6 +74,8 @@ else:
             display(view_all(), 'All Accounts Saved')
         elif command == 'UPDATE':
             print(update_password(input("Platform: ").upper(), input("New Password: ")))
+        elif command == 'GENERATE':
+            print('\nGenerated Password: ' + generate_pass())
         elif command == 'QUIT':
             print('Goodbye!')
             break
