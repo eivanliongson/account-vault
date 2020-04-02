@@ -31,14 +31,16 @@ else:
                 {"platform": accounts[0], "username": accounts[1], "password": accounts[2]})
                 # dictionary key => value
             connect.commit()
-        return '\nAccount Stored!'
+        return f'\nAccount Stored for {accounts[0]}!'
 
     def view_account(platform):
+        print("\nAccount Info\n")
         with connect:
             return c.execute("select * from accounts where platform = :platform", 
             {"platform":platform.upper()}).fetchall()
 
     def view_all():
+        print("\nAll Accounts Saved\n")
         with connect:
             return c.execute("select * from accounts").fetchall()
 
@@ -47,21 +49,28 @@ else:
             c.execute("update accounts set password = :password where platform = :platform",
                 {"password": new, "platform": platform})
             connect.commit()
-            return f'Updated Password!'
+            return f'Updated Password for {platform}!'
+
+    def delete_account(platform):
+        with connect:
+            c.execute("delete from accounts where platform = :platform",
+                {"platform": platform})
+            connect.commit()
+            return f'{platform} Account Deleted'
 
     def generate_pass():
         code = string.ascii_letters + '123456789' + '!@#$%^&*'
-        generated = [code[random.randint(0,len(code)-1)] for x in range(8)] # change 8 to how long your password
+        generated = [code[random.randint(0,len(code)-1)] for x in range(12)] # change 8 to how long your password
         return ''.join(generated)
 
-    def display(data, title):
-        print(title)
+    def display(data):
         for items in data:
-            print(items)
+            print(items[0] +'-'+ items [1] +'-'+ items[2])
+            print('\n' + '-'*10)
 
     while True:
         print('\nCommands:')
-        for items in ['add', 'view','view all','update','generate','quit']:
+        for items in ['add', 'view','view all','update','delete','generate','quit']:
             print(items)
         
         command = input(': ').upper()
@@ -69,9 +78,11 @@ else:
             accounts = [input('\nPlatform: ').upper(),input('Username: '),input('Password: ')]
             print(add_account(accounts))
         elif command == 'VIEW':
-            display(view_account(input("Platform: ").upper()), "Account Info")
+            display(view_account(input("Platform: ").upper()))
         elif command == 'VIEW ALL':
-            display(view_all(), 'All Accounts Saved')
+            display(view_all())
+        elif command == 'DELETE':
+            print(delete_account(input("Platform: ").upper()))
         elif command == 'UPDATE':
             print(update_password(input("Platform: ").upper(), input("New Password: ")))
         elif command == 'GENERATE':
